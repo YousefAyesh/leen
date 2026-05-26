@@ -128,7 +128,49 @@
   <div id="page2" class="page"></div>
 
   <script>
-    // JS goes here in later tasks
+    const btnNo = document.getElementById('btnNo');
+
+    // ── Initial placement ──────────────────────────────────────────────
+    // Position the No button at its natural layout spot on load,
+    // then switch it to fixed so JS can reposition freely.
+    function initNoBtn() {
+      const rect = btnNo.getBoundingClientRect();
+      btnNo.style.left = rect.left + 'px';
+      btnNo.style.top  = rect.top  + 'px';
+      btnNo.style.width = rect.width + 'px';
+    }
+
+    window.addEventListener('load', initNoBtn);
+    window.addEventListener('resize', initNoBtn);
+
+    // ── Desktop flee ───────────────────────────────────────────────────
+    const FLEE_RADIUS = 130; // px — how close the mouse has to get
+
+    function randomSafePos(bw, bh) {
+      const margin = 20;
+      const x = margin + Math.random() * (window.innerWidth  - bw - margin * 2);
+      const y = margin + Math.random() * (window.innerHeight - bh - margin * 2);
+      return { x, y };
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      const rect = btnNo.getBoundingClientRect();
+      const cx = rect.left + rect.width  / 2;
+      const cy = rect.top  + rect.height / 2;
+      const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
+
+      if (dist < FLEE_RADIUS) {
+        const { x, y } = randomSafePos(rect.width, rect.height);
+        btnNo.style.left = x + 'px';
+        btnNo.style.top  = y + 'px';
+      }
+    });
+
+    // ── Yes button ─────────────────────────────────────────────────────
+    document.getElementById('btnYes').addEventListener('click', () => {
+      document.getElementById('page1').classList.remove('active');
+      document.getElementById('page2').classList.add('active');
+    });
   </script>
 </body>
 </html>
