@@ -30,10 +30,59 @@
       align-items: center;
       justify-content: center;
     }
+
+    .gif-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+      max-width: 560px;
+      margin-bottom: 28px;
+    }
+
+    .gif-grid > div {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      color: #fff;
+      text-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+      margin-bottom: 32px;
+    }
   </style>
 </head>
 <body>
-  <div id="page1" class="page active"></div>
+  <div id="page1" class="page active">
+    <div class="gif-grid">
+      <div>
+        <div class="tenor-gif-embed" data-postid="4338452386513641626" data-share-method="host" data-aspect-ratio="1" data-width="100%">
+          <a href="https://tenor.com/view/cat-shield-bashing-warrior-banging-gif-4338452386513641626">Cat Shield GIF</a>
+        </div>
+      </div>
+      <div>
+        <div class="tenor-gif-embed" data-postid="10000605937555107357" data-share-method="host" data-aspect-ratio="1.02049" data-width="100%">
+          <a href="https://tenor.com/view/kitty-cat-cat-in-love-in-love-cat-happy-gif-10000605937555107357">Kitty Cat Meme</a>
+        </div>
+      </div>
+      <div>
+        <div class="tenor-gif-embed" data-postid="3122588929262013745" data-share-method="host" data-aspect-ratio="0.564257" data-width="100%">
+          <a href="https://tenor.com/view/cat-licking-popsicle-gif-3122588929262013745">Cat Licking GIF</a>
+        </div>
+      </div>
+      <div>
+        <div class="tenor-gif-embed" data-postid="13580267959542514666" data-share-method="host" data-aspect-ratio="0.924686" data-width="100%">
+          <a href="https://tenor.com/view/goth-goth-cat-black-goth-cat-cat-black-cat-gif-13580267959542514666">Goth Cat GIF</a>
+        </div>
+      </div>
+    </div>
+    <h1>do you miss me? 🥺</h1>
+    <!-- buttons added in Task 3 -->
+  </div>
+  <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
   <div id="page2" class="page"></div>
 
   <script>
