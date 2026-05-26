@@ -58,6 +58,40 @@
     @media (max-width: 360px) {
       .gif-grid { grid-template-columns: 1fr; }
     }
+
+    .btn-row {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      padding: 14px 40px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      transition: transform 0.1s;
+    }
+
+    .btn-yes {
+      background: #fff;
+      color: #FF69B4;
+    }
+
+    .btn-yes:hover { transform: scale(1.06); }
+
+    .btn-no {
+      background: #c0392b;
+      color: #fff;
+      position: fixed;
+      transition: left 0.08s, top 0.08s;
+    }
   </style>
 </head>
 <body>
@@ -85,7 +119,10 @@
       </div>
     </div>
     <h1>do you miss me? 🥺</h1>
-    <!-- buttons added in Task 3 -->
+    <div class="btn-row">
+      <button class="btn btn-yes" id="btnYes">yes 💕</button>
+      <button class="btn btn-no"  id="btnNo">no</button>
+    </div>
   </div>
   <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
   <div id="page2" class="page"></div>
