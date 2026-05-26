@@ -154,6 +154,7 @@
     }
 
     document.addEventListener('mousemove', (e) => {
+      if (!document.getElementById('page1').classList.contains('active')) return;
       const rect = btnNo.getBoundingClientRect();
       const cx = rect.left + rect.width  / 2;
       const cy = rect.top  + rect.height / 2;
