@@ -167,6 +167,15 @@
       }
     });
 
+    // ── Mobile flee ────────────────────────────────────────────────────
+    btnNo.addEventListener('touchstart', (e) => {
+      e.preventDefault(); // block the tap from registering as a click
+      const rect = btnNo.getBoundingClientRect();
+      const { x, y } = randomSafePos(rect.width, rect.height);
+      btnNo.style.left = x + 'px';
+      btnNo.style.top  = y + 'px';
+    }, { passive: false });
+
     // ── Yes button ─────────────────────────────────────────────────────
     document.getElementById('btnYes').addEventListener('click', () => {
       document.getElementById('page1').classList.remove('active');
