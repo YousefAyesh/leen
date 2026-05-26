@@ -92,8 +92,13 @@
     .btn-no {
       background: #c0392b;
       color: #fff;
-      transition: transform 0.1s, left 0.08s, top 0.08s;
+      transition: transform 0.1s;
       touch-action: manipulation;
+    }
+
+    .btn-no.fleeing {
+      position: fixed;
+      transition: transform 0.1s, left 0.08s, top 0.08s;
     }
 
     .yes-page {
@@ -179,30 +184,14 @@
       </div>
     </div>
     <p class="dunkin-label">Medium Iced Dunkalatte 🧋</p>
-    <img class="dunkin-img" src="assets/dunkin.jpg" alt="Medium Iced Dunkalatte" />
+    <img class="dunkin-img" src="assets/dunkin.jpeg" alt="Medium Iced Dunkalatte" />
   </div>
 
   <script>
     const btnNo = document.getElementById('btnNo');
 
-    // ── Initial placement ──────────────────────────────────────────────
-    // Position the No button at its natural layout spot on load,
-    // then switch it to fixed so JS can reposition freely.
-    function initNoBtn() {
-      btnNo.style.position = '';        // reset to in-flow so we read natural position
-      const rect = btnNo.getBoundingClientRect();
-      btnNo.style.position = 'fixed';  // now lock it there
-      btnNo.style.left  = rect.left + 'px';
-      btnNo.style.top   = rect.top  + 'px';
-      btnNo.style.width = rect.width + 'px';
-    }
-
-    document.addEventListener('DOMContentLoaded', initNoBtn);
-    window.addEventListener('load', initNoBtn);
-    window.addEventListener('resize', initNoBtn);
-
-    // ── Desktop flee ───────────────────────────────────────────────────
-    const FLEE_RADIUS = 130; // px — how close the mouse has to get
+    // ── Flee helpers ───────────────────────────────────────────────────
+    const FLEE_RADIUS = 130;
 
     function randomSafePos(bw, bh) {
       const margin = 20;
@@ -211,13 +200,23 @@
       return { x, y };
     }
 
+    // Button stays in normal flow (beside Yes) until first flee — then locks to fixed.
+    function startFleeing() {
+      if (btnNo.classList.contains('fleeing')) return;
+      const rect = btnNo.getBoundingClientRect();
+      btnNo.style.left  = rect.left  + 'px';
+      btnNo.style.top   = rect.top   + 'px';
+      btnNo.style.width = rect.width + 'px';
+      btnNo.classList.add('fleeing');
+    }
+
+    // ── Desktop flee ───────────────────────────────────────────────────
     document.addEventListener('mousemove', (e) => {
       if (!document.getElementById('page1').classList.contains('active')) return;
+      startFleeing();
       const rect = btnNo.getBoundingClientRect();
-      const cx = rect.left + rect.width  / 2;
-      const cy = rect.top  + rect.height / 2;
-      const dist = Math.hypot(e.clientX - cx, e.clientY - cy);
-
+      const dist = Math.hypot(e.clientX - (rect.left + rect.width / 2),
+                              e.clientY - (rect.top  + rect.height / 2));
       if (dist < FLEE_RADIUS) {
         const { x, y } = randomSafePos(rect.width, rect.height);
         btnNo.style.left = x + 'px';
@@ -228,7 +227,8 @@
     // ── Mobile flee ────────────────────────────────────────────────────
     btnNo.addEventListener('touchstart', (e) => {
       if (!document.getElementById('page1').classList.contains('active')) return;
-      e.preventDefault(); // block the tap from registering as a click
+      e.preventDefault();
+      startFleeing();
       const rect = btnNo.getBoundingClientRect();
       const { x, y } = randomSafePos(rect.width, rect.height);
       btnNo.style.left = x + 'px';
