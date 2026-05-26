@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls /Users/yousef/.claude/skills/subagent-driven-development/)",
+      "Read(//Users/yousef/.claude/skills/subagent-driven-development/**)",
+      "Bash(git init *)",
+      "Bash(git -C /Users/yousef/Developer/Leen diff 6c9a2ec..7dbee8a -- index.html)",
+      "Bash(git branch *)",
+      "Bash(git push *)"
+    ]
+  }
+}
