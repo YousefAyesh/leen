@@ -126,6 +126,19 @@
       font-weight: 900;
       text-shadow: 1px 2px 6px rgba(0,0,0,0.2);
     }
+
+    @keyframes floatUp {
+      0%   { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-120px) scale(1.4); }
+    }
+
+    .heart {
+      position: fixed;
+      font-size: 2rem;
+      pointer-events: none;
+      animation: floatUp 1.2s ease-out forwards;
+      z-index: 999;
+    }
   </style>
 </head>
 <body>
@@ -221,9 +234,20 @@
     }, { passive: false });
 
     // ── Yes button ─────────────────────────────────────────────────────
-    document.getElementById('btnYes').addEventListener('click', () => {
-      document.getElementById('page1').classList.remove('active');
-      document.getElementById('page2').classList.add('active');
+    document.getElementById('btnYes').addEventListener('click', (e) => {
+      for (let i = 0; i < 8; i++) {
+        const h = document.createElement('span');
+        h.className = 'heart';
+        h.textContent = ['💕','💖','🩷','💗'][Math.floor(Math.random()*4)];
+        h.style.left = (e.clientX + (Math.random()-0.5)*80) + 'px';
+        h.style.top  = (e.clientY + (Math.random()-0.5)*40) + 'px';
+        document.body.appendChild(h);
+        h.addEventListener('animationend', () => h.remove());
+      }
+      setTimeout(() => {
+        document.getElementById('page1').classList.remove('active');
+        document.getElementById('page2').classList.add('active');
+      }, 400);
     });
   </script>
 </body>
