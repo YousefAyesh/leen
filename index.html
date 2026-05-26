@@ -92,7 +92,6 @@
     .btn-no {
       background: #c0392b;
       color: #fff;
-      position: fixed;
       transition: transform 0.1s, left 0.08s, top 0.08s;
       touch-action: manipulation;
     }
@@ -190,9 +189,11 @@
     // Position the No button at its natural layout spot on load,
     // then switch it to fixed so JS can reposition freely.
     function initNoBtn() {
+      btnNo.style.position = '';        // reset to in-flow so we read natural position
       const rect = btnNo.getBoundingClientRect();
-      btnNo.style.left = rect.left + 'px';
-      btnNo.style.top  = rect.top  + 'px';
+      btnNo.style.position = 'fixed';  // now lock it there
+      btnNo.style.left  = rect.left + 'px';
+      btnNo.style.top   = rect.top  + 'px';
       btnNo.style.width = rect.width + 'px';
     }
 
