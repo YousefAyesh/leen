@@ -91,6 +91,7 @@
       color: #fff;
       position: fixed;
       transition: transform 0.1s, left 0.08s, top 0.08s;
+      touch-action: manipulation;
     }
   </style>
 </head>
@@ -169,6 +170,7 @@
 
     // ── Mobile flee ────────────────────────────────────────────────────
     btnNo.addEventListener('touchstart', (e) => {
+      if (!document.getElementById('page1').classList.contains('active')) return;
       e.preventDefault(); // block the tap from registering as a click
       const rect = btnNo.getBoundingClientRect();
       const { x, y } = randomSafePos(rect.width, rect.height);
