@@ -196,6 +196,7 @@
       btnNo.style.width = rect.width + 'px';
     }
 
+    document.addEventListener('DOMContentLoaded', initNoBtn);
     window.addEventListener('load', initNoBtn);
     window.addEventListener('resize', initNoBtn);
 
@@ -239,8 +240,11 @@
         const h = document.createElement('span');
         h.className = 'heart';
         h.textContent = ['💕','💖','🩷','💗'][Math.floor(Math.random()*4)];
-        h.style.left = (e.clientX + (Math.random()-0.5)*80) + 'px';
-        h.style.top  = (e.clientY + (Math.random()-0.5)*40) + 'px';
+        const r = e.target.getBoundingClientRect();
+        const cx = e.clientX || (r.left + r.width  / 2);
+        const cy = e.clientY || (r.top  + r.height / 2);
+        h.style.left = (cx + (Math.random()-0.5)*80) + 'px';
+        h.style.top  = (cy + (Math.random()-0.5)*40) + 'px';
         document.body.appendChild(h);
         h.addEventListener('animationend', () => h.remove());
       }
